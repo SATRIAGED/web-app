@@ -1,4 +1,4 @@
-def appName = 'web-app-deployment'
+def appName = 'web-app'
 def namespace = 'web'
 
 
@@ -24,7 +24,7 @@ agent any
                  script {
      withKubeConfig([credentialsId: 'kubeconfig']) 
          {
-       sh "kubectl apply -f deployment.yaml --validate=false"
+       sh "kubectl apply -f deployment.yaml"
        sh "kubectl apply -f service.yaml"
        }                
      }

@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment 
 
 metadata:
-  name: web-app-deployment
+  name: web-app
   labels:
     application: web-app
 
