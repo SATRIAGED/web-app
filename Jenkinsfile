@@ -1,0 +1,37 @@
+def appName = 'web-app-deployment'
+def namespace = 'web'
+
+
+pipeline {
+
+agent any
+ stages {
+     stage("Checkout code") {
+         steps {
+             checkout scm
+         }
+     }
+     stage("Build image") {
+         steps {
+             script {
+                 dockerImage = docker.build('varunmanik/httpd:v1-blue')
+             }
+         }
+     }
+ stage("Deploy Kubernetes") {
+
+     steps {
+                 script {
+     withKubeConfig([credentialsId: 'kubeconfig']) 
+         {
+       sh "kubectl apply -f deployment.yml --validate=false"
+       sh "kubectl apply -f service.yml"
+       }                
+     }
+       //kubernetesDeploy(configs: "deployment.yml", "service.yml")
+       }                
+     }
+
+   }
+ }
+
