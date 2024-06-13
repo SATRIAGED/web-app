@@ -11,6 +11,12 @@ agent { dockerfile true }
              checkout scm
          }
      }
+     stage('Git clone') {
+      steps {
+        git branch: 'main', credentialsId: 'usnmepswdGIT',
+          url: 'https://github.com/SATRIAGED/web-app.git'
+      }
+    }
      stage("Build image") {
          steps {
              sh 'php -v'
