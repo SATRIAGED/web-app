@@ -8,8 +8,8 @@ RUN echo "ServerName 0.0.0.0" >> /etc/apache2/apache2.conf
 
 # Copy the custom index file to the nginx directory
 #COPY ./index.php /var/www/html/
-RUN mkdir /var/www/html/index.php
-RUN echo "Hello-world" >> /var/www/html/index.php
+RUN touch /var/www/html/index.php
+RUN echo "<?php echo 'Hello-world'; ?>" >> /var/www/html/index.php
 
 EXPOSE 80
 
