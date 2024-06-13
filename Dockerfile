@@ -7,7 +7,7 @@ RUN echo "ServerName 0.0.0.0" >> /etc/apache2/apache2.conf
 #RUN apt-get install -y nginx
 
 # Copy the custom index file to the nginx directory
-COPY ./index.html /var/www/html/
+COPY ./index.php /var/www/html/
 
 EXPOSE 80
 
