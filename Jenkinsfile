@@ -4,7 +4,7 @@ def namespace = 'web'
 
 pipeline {
 
-agent any
+agent { dockerfile true }
  stages {
      stage("Checkout code") {
          steps {
@@ -13,9 +13,8 @@ agent any
      }
      stage("Build image") {
          steps {
-             script {
-                 dockerImage = docker.build('varunmanik/httpd:v1-blue')
-             }
+             sh 'php -v'
+             sh 'apache2 -v'
          }
      }
  stage("Deploy Kubernetes") {
@@ -34,4 +33,3 @@ agent any
 
    }
  }
-
