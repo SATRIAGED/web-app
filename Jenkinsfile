@@ -28,10 +28,15 @@ agent { dockerfile true }
     //   branch 'main'
     // }
      steps {
-      withKubeConfig([credentialsId: 'kubeconfig']) {
-          sh 'cat deployment.yaml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
-          sh 'kubectl apply -f service.yaml'
-        }
+      withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'kubeconfig', namespace: 'kube-system', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.0.26:6443') {
+        kubectl apply -f deployment.yaml
+        kubectl apply -f service.yaml
+    // some block
+      }
+      // withKubeConfig([credentialsId: 'kubeconfig']) {
+      //     sh 'cat deployment.yaml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
+      //     sh 'kubectl apply -f service.yaml'
+      //   }
         // kubernetesDeploy(
         //   kubeconfigId: 'kubeconfig',
         //   configs: 'deployment.yaml',
