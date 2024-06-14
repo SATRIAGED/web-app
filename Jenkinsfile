@@ -29,8 +29,8 @@ agent { dockerfile true }
     // }
      steps {
       withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'kubeconfig', namespace: 'kube-system', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.0.26:6443') {
-        kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
+      sh 'kubectl apply -f deployment.yaml'
+      sh 'kubectl apply -f service.yaml'
     // some block
       }
       // withKubeConfig([credentialsId: 'kubeconfig']) {
