@@ -24,9 +24,9 @@ agent { dockerfile true }
          }
      }
  stage("Deploy Kubernetes") {
-    when {
-      branch 'main'
-    }
+    // when {
+    //   branch 'main'
+    // }
      steps {
       withKubeConfig([credentialsId: 'kubeconfig']) {
           sh 'cat deployment.yaml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
