@@ -26,9 +26,9 @@ agent { dockerfile true }
  stage("Deploy Kubernetes") {
 
      steps {
-                 script {
-     withKubeConfig([credentialsId: 'kubeconfig']) 
-     kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
+        script {
+          withKubeConfig(credentialsId: "kubeconfig") 
+          kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
       //    {
       //  sh "kubectl apply -f deployment.yaml"
       //  sh "kubectl apply -f service.yaml"
