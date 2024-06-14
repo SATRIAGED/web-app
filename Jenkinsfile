@@ -29,8 +29,9 @@ agent { dockerfile true }
     // }
      steps {
       withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'kubeconfig', namespace: 'kube-system', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.0.26:6443') {
-      sh 'kubectl apply -f deployment.yaml'
-      sh 'kubectl apply -f service.yaml'
+      // sh 'kubectl apply -f deployment.yaml'
+      // sh 'kubectl apply -f service.yaml'
+      sh 'ssh devops@192.168.0.26 /usr/local/bin/kubectl apply -f /var/lib/jenkins/workspace/web-app/deployment.yaml --kubeconfig=~/.kube/config'
     // some block
       }
       // withKubeConfig([credentialsId: 'kubeconfig']) {
