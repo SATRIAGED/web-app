@@ -29,8 +29,8 @@ agent { dockerfile true }
                  script {
      withKubeConfig([credentialsId: 'kubeconfig']) 
          {
-       sh "$(which kubectl) apply -f deployment.yaml"
-       sh "$(which kubectl) apply -f service.yaml"
+       sh "$(/usr/local/bin/kubectl) apply -f deployment.yaml"
+       sh "$(/usr/local/bin/kubectl) apply -f service.yaml"
        }                
      }
        //kubernetesDeploy(configs: "deployment.yml", "service.yml")
