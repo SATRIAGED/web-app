@@ -28,18 +28,18 @@ agent { dockerfile true }
       branch 'main'
     }
      steps {
-        kubernetesDeploy(
-          kubeconfigId: 'kubeconfig',
-          configs: 'deployment.yaml',
-          enableConfigSubstitution: true
-        )
-        kubernetesDeploy(
-          kubeconfigId: 'kubeconfig',
-          configs: 'service.yaml',
-          enableConfigSubstitution: true
-        )
-        // withKubeConfig(credentialsId: "kubeconfig") 
-        // kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
+        // kubernetesDeploy(
+        //   kubeconfigId: 'kubeconfig',
+        //   configs: 'deployment.yaml',
+        //   enableConfigSubstitution: true
+        // )
+        // kubernetesDeploy(
+        //   kubeconfigId: 'kubeconfig',
+        //   configs: 'service.yaml',
+        //   enableConfigSubstitution: true
+        // )
+        withKubeConfig(credentialsId: "kubeconfig") 
+        kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
       //    {
       //  sh "kubectl apply -f deployment.yaml"
       //  sh "kubectl apply -f service.yaml"
