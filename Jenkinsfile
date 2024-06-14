@@ -38,8 +38,10 @@ agent { dockerfile true }
         //   configs: 'service.yaml',
         //   enableConfigSubstitution: true
         // )
-        kubeconfig(credentialsId: "kubeconfig") {
-          kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
+        kubeconfig(credentialsId: 'kubeconfig', serverUrl: 'https://192.168.0.26:6443') {
+          sh "kubectl apply -f deployment.yaml"
+          sh "kubectl apply -f service.yaml"
+          // kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
         }
       //    {
       //  sh "kubectl apply -f deployment.yaml"
