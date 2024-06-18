@@ -23,36 +23,19 @@ agent { dockerfile true }
              sh 'docker image list'
          }
      }
-     stage("ssh Kubernetes") {
-      steps {
-      def remote = [:]
-      remote.name = 'k8s-master'
-      remote.host = '192.168.0.26'
-      remote.user = 'devops'
-      remote.password = '123123'
-      remote.allowAnyHosts = true
-      }
-     }
-     stage('Put'){
-      steps {
-      sshPut remote: remote, from: 'deployment.yaml', into: '.'
-      }
-     }
-     stage('deploy'){
-      steps {
-      sshCommand remote: remote, command: "kubectl apply -f deployment.yaml"
-      }
-     }
+ stage("Deploy Kubernetes") {
     // when {
     //   branch 'main'
     // }
-    //  steps {
-    //   withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'kubeconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.0.26:6443') {
+     steps {
+      withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'kubeconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.0.26:6443') {
       // sh 'kubectl apply -f deployment.yaml'
       // sh 'kubectl apply -f service.yaml'
-      // sh "mkdir -p ~/.kube/"
+      sh "mkdir -p ~/.kube/"
+      sh "kubectl apply -f deployment.yaml"
+      sh "kubectl apply -f service.yaml"
     // some block
-      
+      }
       // withKubeConfig([credentialsId: 'kubeconfig']) {
       //     sh 'cat deployment.yaml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
       //     sh 'kubectl apply -f service.yaml'
@@ -79,3 +62,6 @@ agent { dockerfile true }
        //kubernetesDeploy(configs: "deployment.yml", "service.yml")
        }                
      }
+
+   }
+ }
