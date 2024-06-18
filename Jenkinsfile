@@ -73,6 +73,3 @@ agent { dockerfile true }
        //kubernetesDeploy(configs: "deployment.yml", "service.yml")
        }                
      }
-
-   }
- }
