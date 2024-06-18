@@ -24,18 +24,24 @@ agent { dockerfile true }
          }
      }
      stage("ssh Kubernetes") {
+      steps {
       def remote = [:]
       remote.name = 'k8s-master'
       remote.host = '192.168.0.26'
       remote.user = 'devops'
       remote.password = '123123'
       remote.allowAnyHosts = true
+      }
      }
      stage('Put'){
+      steps {
       sshPut remote: remote, from: 'deployment.yaml', into: '.'
+      }
      }
      stage('deploy'){
+      steps {
       sshCommand remote: remote, command: "kubectl apply -f deployment.yaml"
+      }
      }
     // when {
     //   branch 'main'
