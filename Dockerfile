@@ -38,13 +38,13 @@ ADD index.html /www/data/
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Create a runner script for the entrypoint
-COPY runner.sh /runner.sh
-RUN chmod +x /runner.sh
+#COPY runner.sh /runner.sh
+#RUN chmod +x /runner.sh
 
 # Expose ports
 EXPOSE 80
 
-ENTRYPOINT ["/runner.sh"]
+#ENTRYPOINT ["/runner.sh"]
 
 # Set the default command to execute
 # when creating a new container
