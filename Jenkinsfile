@@ -31,6 +31,7 @@ agent { dockerfile true }
       withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'kubeconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.0.26:6443') {
       // sh 'kubectl apply -f deployment.yaml'
       // sh 'kubectl apply -f service.yaml'
+      sh "mkdir -p ~/.kube/"
       sh "kubectl apply -f deployment.yaml"
       sh "kubectl apply -f service.yaml"
     // some block
